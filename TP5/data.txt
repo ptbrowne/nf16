@@ -1,0 +1,7 @@
+ID	NOM	FONCTION	AGE	SALAIRE
+1	Bruno	Chef	 	35	3000
+2	Thomas	Manager		45	3300
+3	Laura	Secretariat	25	2100
+4	Sophie	Marchandise	32	3000
+5	Cesar	Ingenieur	28	3300
+6	David	Technicien	26	2100
