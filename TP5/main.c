@@ -59,39 +59,20 @@ pNoeud insererEmploye(pNoeud arbre, pEmploye newEmploye) {
     if (newEmploye->salaire==arbre->salaire)
         empiler(arbre->pileEmploye,newEmploye);
     else {
-        if (arbre->gch || arbre->drt) { // si c est des noeuds internes
-            if (newEmploye->salaire<arbre->salaire) {
-                if (arbre->gch)
-                    insererEmploye(arbre->gch,newEmploye);
-                else {
-                    pNoeud newNoeud=Nouveaunoeud(newEmploye->salaire);
-                    empiler(newNoeud->pileEmploye,newEmploye);
-                    arbre->gch=newNoeud;
-                }
-            }
-            else {
-                if (arbre->drt)
-                    insererEmploye(arbre->drt,newEmploye);
-                else {
-                    pNoeud newNoeud=Nouveaunoeud(newEmploye->salaire);
-                    empiler(newNoeud->pileEmploye,newEmploye);
-                    arbre->drt=newNoeud;
-                }
-            }
-        }
-        else { // on est arrive aux feuilles
-
+        pNoeud arbre_ajout;
+        if (newEmploye->salaire<arbre->salaire)
+            arbre_ajout=arbre->gch;
+        else
+            arbre_ajout=arbre->drt;
+        if (arbre_ajout!=NULL)
+                insererEmploye(arbre_ajout,newEmploye);
+        else {
             pNoeud newNoeud=Nouveaunoeud(newEmploye->salaire);
             empiler(newNoeud->pileEmploye,newEmploye);
-            if (arbre->salaire==NULL) {
-                return (pNoeud)newEmploye;
-            }
-            else {
-                if (newEmploye->salaire<arbre->salaire)
-                    arbre->gch=newNoeud;
-                else
-                    arbre->drt=newNoeud;
-            }
+            if (newEmploye->salaire<arbre->salaire)
+                arbre->gch=newNoeud;
+            else
+                arbre->drt=newNoeud;
         }
     }
     while (arbre->pere!=NULL)
@@ -113,12 +94,32 @@ afficheArbreTest (pNoeud arbre) {
         afficheArbreTest(arbre->drt);
 }
 
+pNoeud supprimerEmploye(pNoeud arbre, int numero) {
+    pNoeud endroit=chercherEmploye(arbre,numero); // on cherche dans quel noeud est l'employe
+    supprimerEmployePile(endroit->pileEmploye,numero); // on le supprime de la pile employe du noeud
+    if (pileVide(endroit)) { // on supprime le noeud
+        if (endroit->gch && endroit->drt) { // le noeud a 2 enfants
+            // voir sur wikipedia : http://fr.wikipedia.org/wiki/Arbre_binaire_de_recherche#Suppression
+        }
+        else if (endroit->gch && endroit->drt==NULL)// le noeud a 1 enfant a gauche
+            endroit->pere->gch=endroit->gch;
+        else if (endroit->gch==NULL && endroit->drt)
+            endroit->pere->drt=endroit->drt;
+        else { // le noeud est une feuille
+            if (endroit->pere->salaire>endroit->salaire) // endroit est a gauche
+                endroit->pere->gch=NULL;
+            else // endroit est a droite
+                endroit->pere->drt=NULL;
+        }
+        free(endroit);
+    }
+}
+
 int main() {
 pNoeud a=Nouveaunoeud(5);
 //pEmploye b=nouveauEmploye(14, "bob", "directeur",20,5000);
 //printf("salaire : %d\n",a->salaire);
 //afficherEmploye(b);
-
     int i,salaire;
     for (i=0;i<5;i++) {
         salaire=0;
@@ -127,4 +128,5 @@ pNoeud a=Nouveaunoeud(5);
         insererEmploye(a,b);
     }
     afficheArbreTest(a);
+
 }

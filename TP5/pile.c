@@ -16,12 +16,10 @@ pPile creerPile() {
 }
 
 int	pileVide ( pPile p) {
-    if(p == NULL)
-    {
+    if(p == NULL) {
         perror("erreur: pile.c : fonction pileVide: pointeur NULL");
         return ERROR;
     }
-
 	if (p->iSommet == -1)
 		return 1;
 	else
@@ -29,8 +27,7 @@ int	pileVide ( pPile p) {
 }
 
 int	pilePleine( pPile p) {
-    if(p == NULL)
-    {
+    if(p == NULL) {
         perror("erreur: pile.c : fonction pilePleine: pointeur NULL");
         return ERROR;
     }
@@ -42,8 +39,7 @@ int	pilePleine( pPile p) {
 }
 
 void empiler( pPile p, pEmploye pE ) {
-    if(p == NULL || pE == NULL)
-    {
+    if(p == NULL || pE == NULL) {
         perror("erreur: pile.c : fonction empiler: pointeur NULL");
         return;
     }
@@ -59,8 +55,7 @@ void empiler( pPile p, pEmploye pE ) {
 
 pEmploye depiler( pPile p ) {
 	pEmploye pE;
-    if(p == NULL)
-    {
+    if(p == NULL) {
         perror("erreur: pile.c : fonction depiler: pointeur NULL");
         return NULL;
     }
@@ -77,8 +72,7 @@ pEmploye depiler( pPile p ) {
 
 pEmploye SommetEmploye( pPile p )
 {
-    if(p == NULL)
-    {
+    if(p == NULL) {
         perror("erreur: pile.c : fonction SommetEmploye: pointeur NULL");
         return NULL;
     }
@@ -96,14 +90,12 @@ void supprimerPile(pPile p)
 {
     pEmploye pE;
 
-    if(p == NULL)
-    {
+    if(p == NULL) {
         perror("erreur: pile.c : fonction supprimerPile: pointeur NULL");
         return;
     }
 
-    while(!pileVide(p))
-    {
+    while(!pileVide(p)) {
       pE = depiler(p);
       free(pE);
     }
@@ -112,15 +104,12 @@ void supprimerPile(pPile p)
 }
 
 
-void supprimerEmployePile(pPile p, int num)
-{
+void supprimerEmployePile(pPile p, int num) {
     pPile p2 = creerPile();
     pEmploye pE=NULL;
     pEmploye pE2=NULL;
 
-
-    if(p == NULL)
-    {
+    if(p == NULL) {
         perror("erreur: pile.c : fonction supprimerEmployePile: pointeur NULL");
         return;
     }
@@ -130,8 +119,7 @@ void supprimerEmployePile(pPile p, int num)
 		return;
 	}
 
-    while(!pileVide(p))
-    {
+    while(!pileVide(p)) {
         pE2 = depiler(p);
         if((pE2->num) == num)
         {
@@ -142,8 +130,7 @@ void supprimerEmployePile(pPile p, int num)
             empiler(p2,pE2);
     }
 
-    while(!pileVide(p2))
-    {
+    while(!pileVide(p2)) {
         pE2 = depiler(p2);
         empiler(p,pE2);
     }

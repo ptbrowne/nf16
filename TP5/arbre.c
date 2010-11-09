@@ -75,8 +75,7 @@ pNoeud depilerN( pPileN p) {
 	return pN;
 }
 
-pNoeud SommetNoeud( pPileN p )
-{
+pNoeud SommetNoeud( pPileN p ){
      if(p == NULL)
     {
         perror("erreur: pile.c : fonction SommetNoeud: pointeur NULL");
@@ -92,8 +91,7 @@ pNoeud SommetNoeud( pPileN p )
 }
 
 
-void supprimerPileN(pPileN p)
-{
+void supprimerPileN(pPileN p){
     pNoeud pN;
 
     if(p == NULL)
@@ -112,8 +110,7 @@ void supprimerPileN(pPileN p)
 }
 
 
-pNoeud minimumABR(pNoeud arbre)
-{
+pNoeud minimumABR(pNoeud arbre) {
     pNoeud pN;
     pN = arbre;
 
@@ -129,8 +126,7 @@ pNoeud minimumABR(pNoeud arbre)
     return pN;
 }
 
-pNoeud succeseurABR(pNoeud noeud)
-{
+pNoeud succeseurABR(pNoeud noeud) {
       pNoeud pNX,pNY;
 
       if(noeud->drt != NULL)
@@ -158,7 +154,7 @@ void copyEmployer(pEmploye pe1, pEmploye pe2)
 
 
 //fonctions a developper. libre a vous de rajouter des autres fonctions si necessaire
-// la fonction supprimerNoeud vous est fournie 
+// la fonction supprimerNoeud vous est fournie
 
 pNoeud supprimerNoeud(pNoeud arbre, pNoeud noeud)
 {
